@@ -3,8 +3,11 @@
     <v-main v-if="isLaunchDarklyReady">
       <v-app-bar v-if="isLaunchDarklyReady" :elevation="2">
         <v-app-bar-title>Features Powered by LaunchDarkly</v-app-bar-title>
+        <v-spacer></v-spacer>
+
         <ThemeSwitcher />
-        <v-select></v-select>
+        <v-spacer></v-spacer>
+        <Login />
       </v-app-bar>
       <v-navigation-drawer
         permanent
