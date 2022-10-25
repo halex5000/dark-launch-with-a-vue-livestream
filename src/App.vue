@@ -30,11 +30,17 @@ import ThemeSwitcher from "./components/ThemeSwitcher.vue";
 import Login from "./components/Login.vue";
 
 let isLaunchDarklyReady = ref(false);
+let displayQRCode = ref(false);
+
 try {
   isLaunchDarklyReady = useLDReady();
-  console.log("is launch darkly ready", isLaunchDarklyReady);
+  console.log("is launch darkly ready", isLaunchDarklyReady.value);
 
   const client = useLDClient();
+
+  displayQRCode = useLDReady("qr-code", false);
+
+  console.log(displayQRCode.value);
 
   client.identify({
     key: "anonymous",
