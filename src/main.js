@@ -3,7 +3,7 @@ import { createApp } from "vue";
 import { createVuetify } from "vuetify";
 import App from "./App.vue";
 import { md3 } from "vuetify/blueprints";
-import { aliases, mdi } from "vuetify/iconsets/mdi";
+import { loadFonts } from "./plugins/webfontloader";
 import { LDPlugin } from "launchdarkly-vue-client-sdk";
 import QrcodeVue from "qrcode.vue";
 
@@ -31,17 +31,23 @@ const vuetify = createVuetify({
   components: {
     QrcodeVue,
   },
-  icons: {
-    defaultSet: "mdi",
-    aliases,
-    sets: {
-      mdi,
-    },
-  },
   theme: {
     defaultTheme: "light",
+    themes: {
+      light: {
+        colors: {
+          cyan: "#3DD6F5",
+        },
+      },
+      dark: {
+        dark: true,
+        colors: {},
+      },
+    },
   },
 }); // Replaces new Vuetify()
+
+loadFonts();
 
 app.use(vuetify);
 
