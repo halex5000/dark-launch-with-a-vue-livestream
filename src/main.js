@@ -5,20 +5,34 @@ import App from "./App.vue";
 import { md3 } from "vuetify/blueprints";
 import { aliases, mdi } from "vuetify/iconsets/mdi";
 import { LDPlugin } from "launchdarkly-vue-client-sdk";
-
-import * as components from "vuetify/components";
-import * as directives from "vuetify/directives";
+import { VueDraggableNext } from "vue-draggable-next";
+import QrcodeVue from "qrcode.vue";
 
 const app = createApp(App);
 
-app.use(LDPlugin, {
-  clientSideID: import.meta.env.VITE_LAUNCHDARKLY_CLIENT_ID,
-});
+console.log(import.meta.env.VITE_LAUNCHDARKLY_CLIENT_ID);
+
+if (import.meta.env.VITE_LAUNCHDARKLY_CLIENT_ID) {
+  // we're telling the LaunchDarkly SDK the client ID with which it should retrieve flags
+  const clientSideID = import.meta.env.VITE_LAUNCHDARKLY_CLIENT_ID;
+
+  // this didn't have to be a named variable, but I wanted to be extra clear about what I was doing here
+  // here are the docs about the plugin options:
+  // https://launchdarkly.github.io/vue-client-sdk/index.html#LDPluginOptions
+  const launchDarklyPluginOptions = {
+    clientSideID,
+    //user, // our user is anonymoust (by default) but you can read more about user here
+  };
+
+  app.use(LDPlugin, launchDarklyPluginOptions);
+}
 
 const vuetify = createVuetify({
-  components,
-  directives,
   blueprint: md3,
+  components: {
+    draggable: VueDraggableNext,
+    QrcodeVue,
+  },
   icons: {
     defaultSet: "mdi",
     aliases,

@@ -22,4 +22,4 @@ This template should help get you started developing with Vue 3 in Vite. The tem
 ## Helpful Links:
 
 - https://docs.launchdarkly.com/sdk/client-side/vue
--
+- https://dark-launch-with-a-vue-livestream.netlify.app/
